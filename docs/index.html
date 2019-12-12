@@ -36,18 +36,18 @@
       repo: 'Blog', // 仓库名
       owner: 'FourfireChen',// 仓库的创建者
       admin: ['FourfireChen'], // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-      id: decodeURI(location.pathname),
+      id: location.hash.match(/#(.*?)([?]|$)/)[1],
       title: location.hash.match(/#(.*?)([?]|$)/)[1]
     })
     window.onhashchange = function(event){
-      if(event.newURL.split('?')[0] !== event.oldURL .split('?')[0]) {
+      if(event.newURL.split('?')[0] !== event.oldURL.split('?')[0]) {
         gitalk = new Gitalk({
           clientID: '14e5bbeacfd175f90138',// GitHub Application Client ID
           clientSecret: '2c183f520763b74927f2f426cede55b588b37bd2',// GitHub Application secret ID
           repo: 'Blog', // 仓库名
           owner: 'FourfireChen',// 仓库的创建者
           admin: ['FourfireChen'], // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-          id: decodeURI(location.pathname),
+          id: location.hash.match(/#(.*?)([?]|$)/)[1],
           title: location.hash.match(/#(.*?)([?]|$)/)[1]
         })
       }
