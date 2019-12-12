@@ -17,7 +17,7 @@
       clientSecret: '2c183f520763b74927f2f426cede55b588b37bd2',// GitHub Application secret ID
       repo: 'Blog', // 仓库名
       owner: 'FourfireChen',// 仓库的创建者
-      admin: ['FourfireChen'], // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+      admin: ["FourfireChen"], // 如果仓库有多个人可以操作，那么在这里以数组形式写出
       distractionFreeMode: false
     };
 
@@ -31,20 +31,18 @@
       subMaxLevel: 4,
       auto2top: true,
       plugins: [
-        function (hook, vm) {
+      function (hook, vm) {
           hook.doneEach(function() {
             var label, domObj, main, divEle, gitalk;
             label = vm.route.path.split("/").pop();
             domObj = Docsify.dom;
             main = domObj.getNode("#main");
-  
             Array.apply(
               null,
               document.querySelectorAll("div.gitalk-container")
             ).forEach(function(ele) {
               ele.remove();
             });
-  
             divEle = domObj.create("div");
             divEle.id = "gitalk-container-" + label;
             divEle.className = "gitalk-container";
@@ -62,7 +60,6 @@
   <script src="//unpkg.com/docsify/lib/plugins/emoji.js"></script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
   <script src="//unpkg.com/docsify-copy-code"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
   <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
   <script src="//fourfire.top/js/md5.min.js"></script>
   <!-- <script>
