@@ -2,22 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>四火的博客</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
 </head>
 <body>
   <div id="app"></div>
   <script>
+    var gitalkConfig = {
+      clientID: '14e5bbeacfd175f90138',
+      clientSecret: '2c183f520763b74927f2f426cede55b588b37bd2',
+      repo: 'Blog',
+      owner: 'FourfireChen',
+      admin: ["FourfireChen"],
+      distractionFreeMode: false
+    };
+
     window.$docsify = {
-      name: '',
+      name: 'Fourfire\'s blog',
       repo: '',
       coverpage: true,
-      loadNavbar: true
+      loadSidebar: true,
+      autoHeader: true,
+      subMaxLevel: 4,
+      auto2top: true,
+      plugins: [
+      function (hook, vm) {
+          hook.doneEach(function() {
+            var label, domObj, main, divEle, gitalk;
+            label = md5(vm.route.path.split("/").pop());
+            domObj = Docsify.dom;
+            main = domObj.getNode("#main");
+            Array.apply(
+              null,
+              document.querySelectorAll("div.gitalk-container")
+            ).forEach(function(ele) {
+              ele.remove();
+            });
+            divEle = domObj.create("div");
+            divEle.id = "gitalk-container-" + label;
+            divEle.className = "gitalk-container";
+            divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
+            domObj.appendTo(domObj.find(".content"), divEle);
+            gitalk = new Gitalk(
+              Object.assign(gitalkConfig, { id: !label ? "home" : label })
+            );
+            gitalk.render("gitalk-container-" + label);
+          });
+        }
+      ]
     }
   </script>
+  <script src="//unpkg.com/docsify/lib/plugins/emoji.js"></script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify-copy-code"></script>
+  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="//fourfire.top/js/md5.min.js"></script>
 </body>
 </html>
