@@ -7,6 +7,7 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
 </head>
 <body>
   <div id="app"></div>
@@ -24,6 +25,25 @@
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
   <script src="//unpkg.com/docsify-copy-code"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/disqus.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
+  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script>
+    var gitalk = new Gitalk({
+    clientID: '14e5bbeacfd175f90138',// GitHub Application Client ID
+    clientSecret: '2c183f520763b74927f2f426cede55b588b37bd2',// GitHub Application secret ID
+    repo: 'Blog', // 仓库名
+    owner: 'FourfireChen',// 仓库的创建者
+    admin: ['FourfireChen'], // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+    title: location.hash.match(/#(.*?)([?]|$)/)[1],
+    id: location.hash.match(/#(.*?)([?]|$)/)[1],
+  })
+  
+  // 监听URL中hash的变化，如果发现换了一个MD文件，那么刷新页面，解决整个网站使用一个gitalk评论issues的问题。
+    window.onhashchange = function(event){
+      if(event.newURL.split('?')[0] !== event.oldURL .split('?')[0]) {
+        location.reload()
+      }
+    }
+  </script>
 </body>
 </html>
