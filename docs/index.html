@@ -34,6 +34,13 @@
         nextText: '下一章节',
         crossChapter: true
       },
+      search: {
+        maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+        paths: 'auto', // or 'auto'
+        placeholder: 'Type to search',
+        noData: 'No Results!',
+        depth: 5
+      },
       plugins: [
       function (hook, vm) {
           hook.doneEach(function() {
@@ -69,7 +76,6 @@
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-cpp.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-java.js"></script>
-  <!-- <script src="//unpkg.com/docsify/lib/plugins/search.js"></script> -->
-  <!-- <script src="//unpkg.com/docsify"></script> -->
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
 </body>
 </html>
