@@ -30,6 +30,46 @@
   <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
   <script src="//fourfire.top/js/md5.min.js"></script>
   <script>
+    var gitalkConfig = {
+      clientID: '14e5bbeacfd175f90138',// GitHub Application Client ID
+      clientSecret: '2c183f520763b74927f2f426cede55b588b37bd2',// GitHub Application secret ID
+      repo: 'Blog', // 仓库名
+      owner: 'FourfireChen',// 仓库的创建者
+      admin: ['FourfireChen'], // 如果仓库有多个人可以操作，那么在这里以数组形式写出
+      distractionFreeMode: false
+    };
+  
+    window.$docsify = {
+      plugins: [
+        function (hook, vm) {
+          hook.doneEach(function() {
+            var label, domObj, main, divEle, gitalk;
+            label = vm.route.path.split("/").pop();
+            domObj = Docsify.dom;
+            main = domObj.getNode("#main");
+  
+            Array.apply(
+              null,
+              document.querySelectorAll("div.gitalk-container")
+            ).forEach(function(ele) {
+              ele.remove();
+            });
+  
+            divEle = domObj.create("div");
+            divEle.id = "gitalk-container-" + label;
+            divEle.className = "gitalk-container";
+            divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
+            domObj.appendTo(domObj.find(".content"), divEle);
+            gitalk = new Gitalk(
+              Object.assign(gitalkConfig, { id: !label ? "home" : label })
+            );
+            gitalk.render("gitalk-container-" + label);
+          });
+        }
+      ]
+    }
+  </script>
+  <!-- <script>
     var gitalk = new Gitalk({
       clientID: '14e5bbeacfd175f90138',// GitHub Application Client ID
       clientSecret: '2c183f520763b74927f2f426cede55b588b37bd2',// GitHub Application secret ID
@@ -52,6 +92,6 @@
         })
       }
     }
-  </script>
+  </script> -->
 </body>
 </html>
