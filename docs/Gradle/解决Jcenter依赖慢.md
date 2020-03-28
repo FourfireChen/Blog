@@ -32,9 +32,12 @@ allprojects {
 ```groovy
 allprojects {
     repositories {
-        // jcenter()
         // mavenCentral()
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        // jcenter()
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+    	// google()
+        maven { url 'https://maven.aliyun.com/repository/google' }
     }
 ```
 
